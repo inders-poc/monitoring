@@ -1,0 +1,30 @@
+# prometheus.yaml 
+grafana:
+  adminPassword: admin 
+
+   
+prometheus:
+  thanosService:
+    enabled: true
+  thanos:
+    enabled: true
+    create: true
+  thanosServiceMonitor:
+    enabled: true
+    interval: 5s
+   
+  prometheusSpec:
+    thanos:
+      objectStorageConfig:
+        key: thanos.yaml
+        name: thanos-objstore-config
+   
+prometheusOperator:
+  thanosImage:
+    repository: quay.io/thanos/thanos
+    version: v0.26.0
+    tag: v0.26.0
+   
+kubelet:
+  serviceMonitor:
+    https: false
